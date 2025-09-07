@@ -8,6 +8,7 @@ namespace MottuChallenge.Domain.Entities
         public string Name { get; private set; }
         public Guid AddressId { get; private set; }
         public Address Address { get; private set; }
+        public ICollection<Sector> Sectors { get; private set; } = new List<Sector>();
 
         public Yard(string name, Guid addressId)
         {
