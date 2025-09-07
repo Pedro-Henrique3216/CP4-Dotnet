@@ -1,4 +1,5 @@
 ﻿using MottuChallenge.Domain.Exceptions;
+using MottuChallenge.Domain.Validations;
 
 namespace MottuChallenge.Domain.Entities
 {
@@ -17,7 +18,7 @@ namespace MottuChallenge.Domain.Entities
         {
             ValidateNumber(number);
             ValidateZipCode(zipCode);
-            validateStreet(street);
+            Guard.AgainstNullOrWhitespace(street, nameof(street), nameof(Address));
             this.Id = Guid.NewGuid();
             this.Street = street;
             this.Number = number;
@@ -37,21 +38,10 @@ namespace MottuChallenge.Domain.Entities
             }
 
         }
-
-        private void validateStreet(string street)
-        {
-            if (string.IsNullOrWhiteSpace(street))
-            {
-                throw new DomainValidationException("Street is required", nameof(street), nameof(Address));
-            }
-        }   
-
+ 
         private void ValidateZipCode(string zipCode)
         {
-            if (string.IsNullOrWhiteSpace(zipCode))
-            {
-                throw new DomainValidationException("Zip code is required", nameof(zipCode), nameof(Address));
-            }
+            Guard.AgainstNullOrWhitespace(zipCode, nameof(zipCode), nameof(Address));
             if (zipCode.Length != 8)
             {
                 throw new DomainValidationException("Zip code must have 8 characters", nameof(zipCode), nameof(Address));

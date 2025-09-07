@@ -1,4 +1,6 @@
-﻿namespace MottuChallenge.Domain.Entities
+﻿using MottuChallenge.Domain.Validations;
+
+namespace MottuChallenge.Domain.Entities
 {
     public class Yard
     {
@@ -9,7 +11,8 @@
 
         public Yard(string name, Guid addressId)
         {
-            
+            Guard.AgainstNullOrWhitespace(name, nameof(name), nameof(Yard));
+            Guard.AgainstNullOrEmpty(addressId, nameof(addressId), nameof(Yard));
             this.Id = Guid.NewGuid();
             this.Name = name;
             this.AddressId = addressId;
