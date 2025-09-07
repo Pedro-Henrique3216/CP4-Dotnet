@@ -11,7 +11,7 @@ namespace MottuChallenge.Domain.Entities
         public double X { get; private set; }
         public double Y { get; private set; }
         public SpotStatus Status { get; private set; }
-        public Motorcycle Motorcycle { get; private set; }
+        public Motorcycle? Motorcycle { get; private set; }
         public Guid MotorcycleId { get; set; }
 
         public Spot(double x, double y, Guid sectorId)
