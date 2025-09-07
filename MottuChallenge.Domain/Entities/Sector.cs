@@ -10,6 +10,7 @@ namespace MottuChallenge.Domain.Entities
         public SectorType SectorType { get; private set; }
         public Guid SectorTypeId { get; private set; }
         public ICollection<PolygonPoint> Points { get; private set; } = new List<PolygonPoint>();
+        public ICollection<Spot> Spots { get; private set; } = new List<Spot>();
 
         public Sector(Guid sectorTypeId, Guid yardId)
         {
