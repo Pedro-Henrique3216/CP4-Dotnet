@@ -1,4 +1,4 @@
-namespace MottuChallengeAPI
+namespace MottuChallenge.Api
 {
     public class WeatherForecast
     {

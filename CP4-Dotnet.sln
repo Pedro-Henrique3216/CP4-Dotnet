@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MottuChallenge.API", "MottuChallengeAPI\MottuChallenge.API.csproj", "{2BC58531-0BCF-4588-85AC-9A2B1AF844FD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MottuChallenge.Domain", "MottuChallenge.Domain\MottuChallenge.Domain.csproj", "{9838B11C-5721-48DA-BC54-00C2020F9567}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MottuChallenge.Infrastructure", "MottuChallenge.Infrastructure\MottuChallenge.Infrastructure.csproj", "{B6DA27EF-82C1-4564-9154-DD3582A8D4A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MottuChallenge.Application", "MottuChallenge.Application\MottuChallenge.Application.csproj", "{B8EFBECE-64E4-4E8E-8E9B-8D455DDFBFBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MottuChallenge.Api", "MottuChallenge.Api\MottuChallenge.Api.csproj", "{9E626606-A0EF-4E0E-A704-AA5E569CA9D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2BC58531-0BCF-4588-85AC-9A2B1AF844FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BC58531-0BCF-4588-85AC-9A2B1AF844FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BC58531-0BCF-4588-85AC-9A2B1AF844FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BC58531-0BCF-4588-85AC-9A2B1AF844FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9838B11C-5721-48DA-BC54-00C2020F9567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9838B11C-5721-48DA-BC54-00C2020F9567}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9838B11C-5721-48DA-BC54-00C2020F9567}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{B8EFBECE-64E4-4E8E-8E9B-8D455DDFBFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8EFBECE-64E4-4E8E-8E9B-8D455DDFBFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8EFBECE-64E4-4E8E-8E9B-8D455DDFBFBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E626606-A0EF-4E0E-A704-AA5E569CA9D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E626606-A0EF-4E0E-A704-AA5E569CA9D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E626606-A0EF-4E0E-A704-AA5E569CA9D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E626606-A0EF-4E0E-A704-AA5E569CA9D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

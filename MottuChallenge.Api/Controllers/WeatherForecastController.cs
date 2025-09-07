@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MottuChallengeAPI.Controllers
+namespace MottuChallenge.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

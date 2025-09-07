@@ -1,5 +1,5 @@
 
-namespace MottuChallengeAPI
+namespace MottuChallenge.Api
 {
     public class Program
     {
