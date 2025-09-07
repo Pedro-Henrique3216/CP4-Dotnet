@@ -21,8 +21,8 @@ namespace MottuChallenge.Domain.Entities
             this.PointOrder = pointOrder;
             this.X = x;
             this.Y = y;
-            this.YardId = yardId.Equals(null) ? null : yardId;
-            this.SectorId = sectorId.Equals(null) ? null : sectorId;
+            this.YardId = yardId != Guid.Empty ? yardId : null;
+            this.SectorId = sectorId != Guid.Empty ? sectorId : null;
         }
 
         public PolygonPoint() { }
