@@ -16,5 +16,14 @@ namespace MottuChallenge.Domain.Validations
                 throw new DomainValidationException($"{name} must not be null or empty", name, className);
         }
 
+        public static void AgainstNegativeCoordinates(double x, double y, string className, string nameX = "x", string nameY = "y")
+        {
+            if (x < 0)
+                throw new DomainValidationException($"{nameX} coordinate must be non-negative", nameX, className);
+
+            if (y < 0)
+                throw new DomainValidationException($"{nameY} coordinate must be non-negative", nameY, className);
+        }
+
     }
 }

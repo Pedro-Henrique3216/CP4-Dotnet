@@ -9,6 +9,7 @@ namespace MottuChallenge.Domain.Entities
         public Guid AddressId { get; private set; }
         public Address Address { get; private set; }
         public ICollection<Sector> Sectors { get; private set; } = new List<Sector>();
+        public ICollection<PolygonPoint> Points { get; private set; } = new List<PolygonPoint>();
 
         public Yard(string name, Guid addressId)
         {
