@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MottuChallenge.Domain.Entities;
+using MottuChallenge.Infrastructure.Mapping;
 
 namespace MottuChallenge.Infrastructure.Persistence
 {
@@ -7,5 +8,10 @@ namespace MottuChallenge.Infrastructure.Persistence
     {
         public DbSet<Yard> Yards { get; set; }
         public DbSet<Address> Addresses { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new YardMapping());
+        }
     }
 }
