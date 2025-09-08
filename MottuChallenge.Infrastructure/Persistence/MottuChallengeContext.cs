@@ -12,6 +12,7 @@ namespace MottuChallenge.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new YardMapping());
+            modelBuilder.ApplyConfiguration(new AddressMapping());
         }
     }
 }
