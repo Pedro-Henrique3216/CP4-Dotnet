@@ -12,6 +12,7 @@ namespace MottuChallenge.Infrastructure.Persistence
         public DbSet<SectorType> SectorTypes { get; set; }
         public DbSet<Sector> Sectors { get; set; }
         public DbSet<Spot> Spots { get; set; }
+        public DbSet<Motorcycle> motorcycles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +22,7 @@ namespace MottuChallenge.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new SectorTypeMapping());
             modelBuilder.ApplyConfiguration(new SectorMapping());
             modelBuilder.ApplyConfiguration(new SpotMapping());
+            modelBuilder.ApplyConfiguration(new MotorcycleMapping());
         }
     }
 }
