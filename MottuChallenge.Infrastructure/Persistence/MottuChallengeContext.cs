@@ -10,6 +10,7 @@ namespace MottuChallenge.Infrastructure.Persistence
         public DbSet<Address> Addresses { get; set; }
         public DbSet<PolygonPoint> PolygonPoints { get; set; }
         public DbSet<SectorType> SectorTypes { get; set; }
+        public DbSet<Sector> Sectors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -17,6 +18,7 @@ namespace MottuChallenge.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new AddressMapping());
             modelBuilder.ApplyConfiguration(new PolygonPointMapping());
             modelBuilder.ApplyConfiguration(new SectorTypeMapping());
+            modelBuilder.ApplyConfiguration(new SectorMapping());
         }
     }
 }
