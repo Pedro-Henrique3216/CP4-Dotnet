@@ -12,7 +12,7 @@ namespace MottuChallenge.Infrastructure.Persistence
         public DbSet<SectorType> SectorTypes { get; set; }
         public DbSet<Sector> Sectors { get; set; }
         public DbSet<Spot> Spots { get; set; }
-        public DbSet<Motorcycle> motorcycles { get; set; }
+        public DbSet<Motorcycle> Motorcycles { get; set; }
         public DbSet<Log> Logs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
