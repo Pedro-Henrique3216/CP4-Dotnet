@@ -8,8 +8,12 @@ namespace MottuChallenge.Domain.Entities
         public string Name { get; private set; }
         public Guid AddressId { get; private set; }
         public Address Address { get; private set; }
-        public ICollection<Sector> Sectors { get; private set; } = new List<Sector>();
-        public ICollection<PolygonPoint> Points { get; private set; } = new List<PolygonPoint>();
+
+        private readonly List<Sector> _sectors = new();
+        public IReadOnlyCollection<Sector> Sectors => _sectors.AsReadOnly();
+
+        private readonly List<PolygonPoint> _points = new();
+        public IReadOnlyCollection<PolygonPoint> Points => _points.AsReadOnly();
 
         public Yard(string name, Guid addressId)
         {
@@ -22,5 +26,14 @@ namespace MottuChallenge.Domain.Entities
 
         public Yard() { }
 
+        public void AddSector(Sector sector)
+        {
+            _sectors.Add(sector);
+        }
+
+        public void AddPoint(PolygonPoint point)
+        {
+            _points.Add(point);
+        }
     }
 }
