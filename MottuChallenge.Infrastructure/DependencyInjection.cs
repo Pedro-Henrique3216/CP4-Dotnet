@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MottuChallenge.Infrastructure.Persistence;
+using MottuChallenge.Infrastructure.Repositories;
 
 namespace MottuChallenge.Infrastructure
 {
@@ -15,6 +16,12 @@ namespace MottuChallenge.Infrastructure
             });
 
             return services;
-        } 
+        }
+
+        public static IServiceCollection AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IYardRepository, YardRepository>();
+            return services;
+        }
     }
 }
