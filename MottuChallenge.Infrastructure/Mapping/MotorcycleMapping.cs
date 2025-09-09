@@ -30,6 +30,7 @@ namespace MottuChallenge.Infrastructure.Mapping
             builder.HasOne(m => m.Spot)
                    .WithOne(s => s.Motorcycle)
                    .HasForeignKey<Motorcycle>(m => m.SpotId)
+                   .IsRequired(false)
                    .OnDelete(DeleteBehavior.Restrict);
         }
     }
