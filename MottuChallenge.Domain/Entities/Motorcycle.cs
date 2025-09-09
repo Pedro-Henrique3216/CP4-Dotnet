@@ -14,7 +14,7 @@ namespace MottuChallenge.Domain.Entities
         public string Plate { get; private set; }
         public DateTime LastRevisionDate { get; private set; }
         public Guid SpotId { get; private set; }
-        public Section Spot { get; private set; }
+        public Spot Spot { get; private set; }
 
         public Motorcycle(string model, EngineType engineType, string plate, DateTime lastRevisionDate, Guid spotId)
         {
