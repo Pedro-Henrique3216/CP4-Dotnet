@@ -8,7 +8,7 @@ namespace MottuChallenge.Infrastructure.Mapping
     {
         public void Configure(EntityTypeBuilder<Address> builder)
         {
-            builder.ToTable("addresses"); // tabela em minúsculo
+            builder.ToTable("addresses");
 
             builder.HasKey(a => a.Id);
 
