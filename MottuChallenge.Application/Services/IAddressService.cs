@@ -2,7 +2,7 @@
 
 namespace MottuChallenge.Application.Services
 {
-    internal interface IAddressService
+    public interface IAddressService
     {
         public Task<Address> GetAddressByCepAsync(string cep, string number);
     }

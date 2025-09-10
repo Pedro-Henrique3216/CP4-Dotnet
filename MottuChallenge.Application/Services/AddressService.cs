@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace MottuChallenge.Application.Services
 {
-    internal class AddressService(HttpClient httpClient) : IAddressService
+    public class AddressService(HttpClient httpClient) : IAddressService
     {
 
         private readonly HttpClient _httpClient = httpClient;
