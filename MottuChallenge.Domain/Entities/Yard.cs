@@ -7,7 +7,7 @@ namespace MottuChallenge.Domain.Entities
         public Guid Id { get; private set; }
         public string Name { get; private set; }
         public Guid AddressId { get; private set; }
-        public Address Address { get; private set; }
+        public Address Address { get; set; }
 
         private readonly List<Sector> _sectors = new();
         public IReadOnlyCollection<Sector> Sectors => _sectors.AsReadOnly();
