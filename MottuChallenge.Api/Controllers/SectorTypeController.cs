@@ -15,5 +15,12 @@ namespace MottuChallenge.Api.Controllers
         {
             await _sectorType.AddSectorType(sectorTypeCreateDto);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var sectors = await _sectorType.GetAllSectorTypesAsync();
+            return Ok(sectors);
+        }
     }
 }

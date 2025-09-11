@@ -9,5 +9,7 @@ namespace MottuChallenge.Infrastructure.Repositories
 
         public Task<SectorType> FindSectorByName(string name);
 
+        public Task<List<SectorType>> GetAllSectorTypesAsync();
+
     }
 }

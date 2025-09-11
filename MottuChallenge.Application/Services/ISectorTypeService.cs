@@ -7,5 +7,7 @@ namespace MottuChallenge.Application.Services
     {
 
         public Task<SectorType> AddSectorType(SectorTypeCreateDto sectorTypeCreateDto);
+
+        public Task<List<SectorType>> GetAllSectorTypesAsync();
     }
 }

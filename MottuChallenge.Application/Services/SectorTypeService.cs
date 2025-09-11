@@ -21,5 +21,10 @@ namespace MottuChallenge.Application.Services
             await _sectorTypeRepository.SaveSectorTypeAsync(sectorType);
             return sectorType;
         }
+
+        public async Task<List<SectorType>> GetAllSectorTypesAsync()
+        {
+            return await _sectorTypeRepository.GetAllSectorTypesAsync();
+        }
     }
 }

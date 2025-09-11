@@ -23,6 +23,11 @@ namespace MottuChallenge.Infrastructure.Repositories
             return sectorType;
         }
 
+        public async Task<List<SectorType>> GetAllSectorTypesAsync()
+        {
+            return await _context.SectorTypes.ToListAsync();
+        }
+
 
     }
 }
