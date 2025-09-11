@@ -26,7 +26,7 @@ namespace MottuChallenge.Domain.Entities
             this.DestinationSpotId = destinationSpotId;
         }
 
-        public Log() { }
+        private Log() { }
 
         private void ValidateMessage(string message)
         {

@@ -28,7 +28,7 @@ namespace MottuChallenge.Domain.Entities
             this.ZipCode = zipCode;
             this.Country = country;
         }
-        public Address() { }
+        private Address() { }
 
         private void ValidateNumber(int number)
         {

@@ -29,7 +29,7 @@ namespace MottuChallenge.Domain.Entities
             this.SpotId = spotId;
         }
 
-        public Motorcycle() { }
+        private Motorcycle() { }
 
         private void ValidatePlate(string plate)
         {

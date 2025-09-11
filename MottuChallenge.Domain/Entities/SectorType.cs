@@ -13,7 +13,7 @@ namespace MottuChallenge.Domain.Entities
             this.Name = name;
         }
 
-        public SectorType() { }
+        private SectorType() { }
 
     }
 }
