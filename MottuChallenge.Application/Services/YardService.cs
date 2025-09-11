@@ -29,5 +29,10 @@ namespace MottuChallenge.Application.Services
             await _yardRepository.SaveYardAsync(yard);
             return yard;
         }
+
+        public async Task<Yard?> GetYardByIdAsync(Guid id)
+        {
+            return await _yardRepository.GetYardByIdAsync(id);
+        }
     }
 }

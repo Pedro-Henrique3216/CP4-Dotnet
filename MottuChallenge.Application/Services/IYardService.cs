@@ -5,6 +5,8 @@ namespace MottuChallenge.Application.Services
 {
     public interface IYardService
     {
-        Task<Yard> SaveYardAsync(CreateYardDto createYardDto);    
+        Task<Yard> SaveYardAsync(CreateYardDto createYardDto);
+
+        Task<Yard?> GetYardByIdAsync(Guid id);
     }
 }
