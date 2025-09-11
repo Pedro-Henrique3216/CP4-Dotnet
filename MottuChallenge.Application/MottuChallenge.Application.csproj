@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MottuChallenge.Domain\MottuChallenge.Domain.csproj" />
+    <ProjectReference Include="..\MottuChallenge.Infrastructure\MottuChallenge.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
