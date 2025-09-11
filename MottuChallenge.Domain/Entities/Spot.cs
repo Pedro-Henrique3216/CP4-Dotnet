@@ -26,5 +26,19 @@ namespace MottuChallenge.Domain.Entities
 
         }
         public Spot() { }
+
+        public void AssignMotorcycle(Motorcycle motorcycle)
+        {
+            Motorcycle = motorcycle;
+            MotorcycleId = motorcycle.Id;
+            Status = SpotStatus.OCCUPIED;
+        }
+
+        public void RemoveMotorcycle()
+        {
+            Motorcycle = null;
+            MotorcycleId = null;
+            Status = SpotStatus.FREE;
+        }
     }
 }
