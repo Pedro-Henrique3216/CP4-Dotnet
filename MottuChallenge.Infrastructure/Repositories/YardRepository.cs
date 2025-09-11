@@ -13,5 +13,10 @@ namespace MottuChallenge.Infrastructure.Repositories
            await _context.SaveChangesAsync();
            return yard;
         }
+
+        public async Task<Yard?> GetYardByIdAsync(Guid id)
+        {
+            return await _context.Yards.FindAsync(id);
+        }
     }
 }
