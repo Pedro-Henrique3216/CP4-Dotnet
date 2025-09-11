@@ -1,4 +1,5 @@
 ﻿using MottuChallenge.Domain.Validations;
+using MottuChallenge.Domain.ValueObjects;
 
 namespace MottuChallenge.Domain.Entities
 {

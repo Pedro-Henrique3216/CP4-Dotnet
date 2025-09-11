@@ -1,5 +1,6 @@
 ﻿using MottuChallenge.Application.DTOs.Request;
 using MottuChallenge.Domain.Entities;
+using MottuChallenge.Domain.ValueObjects;
 using MottuChallenge.Infrastructure.Repositories;
 
 namespace MottuChallenge.Application.Services
@@ -21,7 +22,7 @@ namespace MottuChallenge.Application.Services
 
             foreach (var pointDto in createYardDto.Points)
             {
-                var point = new PolygonPoint(pointDto.PointOrder, pointDto.X, pointDto.Y, yard.Id, Guid.Empty);
+                var point = new PolygonPoint(pointDto.PointOrder, pointDto.X, pointDto.Y);
                 yard.AddPoint(point);
             }
             

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MottuChallenge.Domain.Entities;
+using MottuChallenge.Domain.ValueObjects;
 
 namespace MottuChallenge.Infrastructure.Mapping
 {
@@ -35,10 +36,29 @@ namespace MottuChallenge.Infrastructure.Mapping
                    .HasForeignKey(s => s.YardId)
                    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(y => y.Points)
-                   .WithOne(p => p.Yard)
-                   .HasForeignKey(p => p.YardId)
-                   .OnDelete(DeleteBehavior.Cascade);
+            builder.OwnsMany<PolygonPoint>(y => y.Points, pb =>
+            {
+                pb.ToTable("yard_points");
+
+                pb.WithOwner().HasForeignKey("YardId");
+
+                pb.Property<Guid>("Id")
+                  .ValueGeneratedOnAdd();
+
+                pb.Property(p => p.PointOrder)
+                  .HasColumnName("point_order")
+                  .IsRequired();
+
+                pb.Property(p => p.X)
+                  .HasColumnName("x")
+                  .IsRequired();
+
+                pb.Property(p => p.Y)
+                  .HasColumnName("y")
+                  .IsRequired();
+
+                pb.HasKey("Id");
+            });
         }
     }
 }

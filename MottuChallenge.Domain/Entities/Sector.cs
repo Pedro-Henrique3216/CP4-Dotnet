@@ -1,4 +1,5 @@
 ﻿using MottuChallenge.Domain.Validations;
+using MottuChallenge.Domain.ValueObjects;
 
 namespace MottuChallenge.Domain.Entities
 {
@@ -25,7 +26,7 @@ namespace MottuChallenge.Domain.Entities
             this.YardId = yardId;
         }
 
-        public Sector() { }
+        private Sector() { }
 
         public void AddSpot(Spot spot) => _spots.Add(spot);
         public void AddPoint(PolygonPoint point) => _points.Add(point);
