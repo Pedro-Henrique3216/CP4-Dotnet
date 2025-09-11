@@ -21,6 +21,8 @@ namespace MottuChallenge.Infrastructure
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IYardRepository, YardRepository>();
+            services.AddScoped<ISectorRepository, SectorRepository>();
+            services.AddScoped<ISectorTypeRepository, SectorTypeRepository>();
             return services;
         }
     }
