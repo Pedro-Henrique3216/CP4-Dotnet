@@ -15,6 +15,9 @@ namespace MottuChallenge.Api
             builder.Services.AddControllers();
             builder.Services.AddScoped<IYardService, YardService>();
             builder.Services.AddHttpClient<IAddressService, AddressService>();
+            builder.Services.AddScoped<ISectorService, SectorService>();
+            builder.Services.AddScoped<ISpotService, SpotService>();
+            builder.Services.AddScoped<ISectorTypeService, SectorTypeService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
