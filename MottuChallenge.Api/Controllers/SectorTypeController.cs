@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using MottuChallenge.Application.DTOs.Request;
 using MottuChallenge.Application.Services;
 
@@ -22,5 +23,13 @@ namespace MottuChallenge.Api.Controllers
             var sectors = await _sectorType.GetAllSectorTypesAsync();
             return Ok(sectors);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] SectorTypeCreateDto sectorTypeCreateDto)
+        {
+            var sectorType = await _sectorType.UpdateSectorTypeAsync(sectorTypeCreateDto, id);
+            return Ok(sectorType);
+        }
+
     }
 }

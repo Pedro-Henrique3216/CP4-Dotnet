@@ -13,6 +13,12 @@ namespace MottuChallenge.Domain.Entities
             this.Name = name;
         }
 
+        public void AlterName(string name)
+        {
+            Guard.AgainstNullOrWhitespace(name, nameof(name), nameof(SectorType));
+            this.Name = name;
+        }
+
         private SectorType() { }
 
     }

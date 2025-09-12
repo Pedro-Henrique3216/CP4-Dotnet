@@ -27,6 +27,18 @@ namespace MottuChallenge.Infrastructure.Repositories
         {
             return await _context.SectorTypes.ToListAsync();
         }
+        public async Task<SectorType> UpdateSectorTypeAsync(SectorType sectorType)
+        {
+            _context.SectorTypes.Update(sectorType);
+            await _context.SaveChangesAsync();
+            return sectorType;
+        }
+
+        public async Task<SectorType> FindAsync(Guid id)
+        {
+            return await _context.SectorTypes.FindAsync(id);
+        }
+
 
 
     }
