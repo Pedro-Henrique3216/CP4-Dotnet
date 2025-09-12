@@ -8,7 +8,7 @@ namespace MottuChallenge.Infrastructure.Repositories
 
         Task<Yard?> GetYardByIdAsync(Guid id);
 
-        public Task<List<Yard>> GetAllYardsAsync();
+        Task<List<Yard>> GetAllYardsAsync();
 
     }
 }

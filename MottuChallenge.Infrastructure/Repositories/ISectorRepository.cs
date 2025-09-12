@@ -5,11 +5,11 @@ namespace MottuChallenge.Infrastructure.Repositories
     public interface ISectorRepository
     {
 
-        public Task<Sector> SaveSectorAsync(Sector sector);
+        Task<Sector> SaveSectorAsync(Sector sector);
 
-        public Task<List<Sector>> GetSectorsByYardIdAsync(Guid yardId);
+        Task<List<Sector>> GetSectorsByYardIdAsync(Guid yardId);
 
-        public Task<Sector> GetSectorByIdAsync(Guid sectorId);
-        public Task<List<Sector>> GetAllSectorsAsync();
+        Task<Sector> GetSectorByIdAsync(Guid sectorId);
+        Task<List<Sector>> GetAllSectorsAsync();
     }
 }

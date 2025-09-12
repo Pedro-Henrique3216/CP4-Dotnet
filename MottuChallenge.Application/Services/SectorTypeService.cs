@@ -15,7 +15,7 @@ namespace MottuChallenge.Application.Services
             var verifySector = await _sectorTypeRepository.FindSectorByName(sectorTypeCreateDto.Name.ToLower());
             if (verifySector != null)
             {
-                throw new Exception("sada");
+                throw new Exception("Ja existe sectorType com esse nome");
             }
 
             var sectorType = new SectorType(sectorTypeCreateDto.Name.ToLower());

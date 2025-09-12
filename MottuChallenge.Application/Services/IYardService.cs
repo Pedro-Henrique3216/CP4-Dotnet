@@ -10,8 +10,8 @@ namespace MottuChallenge.Application.Services
 
         Task<Yard?> GetYardByIdAsync(Guid id);
 
-        public Task<List<YardResponseDto>> GetAllYardsAsync();
+        Task<List<YardResponseDto>> GetAllYardsAsync();
 
-        public Task<YardResponseDto?> GetYardResponseByIdAsync(Guid id);
+        Task<YardResponseDto?> GetYardResponseByIdAsync(Guid id);
     }
 }

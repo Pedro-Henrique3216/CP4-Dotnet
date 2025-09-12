@@ -5,16 +5,16 @@ namespace MottuChallenge.Infrastructure.Repositories
     public interface ISectorTypeRepository
     {
 
-        public Task<SectorType> SaveSectorTypeAsync(SectorType sectorType);
+        Task<SectorType> SaveSectorTypeAsync(SectorType sectorType);
 
-        public Task<SectorType> FindSectorByName(string name);
+        Task<SectorType> FindSectorByName(string name);
 
-        public Task<List<SectorType>> GetAllSectorTypesAsync();
+        Task<List<SectorType>> GetAllSectorTypesAsync();
 
-        public Task<SectorType> UpdateSectorTypeAsync(SectorType sectorType);
+        Task<SectorType> UpdateSectorTypeAsync(SectorType sectorType);
 
-        public Task<SectorType> FindAsync(Guid id);
+        Task<SectorType> FindAsync(Guid id);
 
-        public Task DeleteSectorTypeAsync(SectorType sectorType);
+        Task DeleteSectorTypeAsync(SectorType sectorType);
     }
 }

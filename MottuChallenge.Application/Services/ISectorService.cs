@@ -6,8 +6,8 @@ namespace MottuChallenge.Application.Services
 {
     public interface ISectorService
     {
-        public Task<Sector> SaveSectorAsync(SectorCreateDto sectorCreateDto);
-        public Task<SectorResponseDto> GetSectorByIdAsync(Guid sectorId);
-        public Task<List<SectorResponseDto>> GetAllSectorsAsync();
+        Task<Sector> SaveSectorAsync(SectorCreateDto sectorCreateDto);
+        Task<SectorResponseDto> GetSectorByIdAsync(Guid sectorId);
+        Task<List<SectorResponseDto>> GetAllSectorsAsync();
     }
 }

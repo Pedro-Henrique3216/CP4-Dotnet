@@ -7,12 +7,12 @@ namespace MottuChallenge.Application.Services
     public interface ISectorTypeService
     {
 
-        public Task<SectorType> AddSectorType(SectorTypeDto sectorTypeCreateDto);
+        Task<SectorType> AddSectorType(SectorTypeDto sectorTypeCreateDto);
 
-        public Task<List<SectorTypeResponseDto>> GetAllSectorTypesAsync();
+        Task<List<SectorTypeResponseDto>> GetAllSectorTypesAsync();
 
-        public Task<SectorTypeResponseDto> UpdateSectorTypeAsync(SectorTypeDto dto, Guid id);
+        Task<SectorTypeResponseDto> UpdateSectorTypeAsync(SectorTypeDto dto, Guid id);
 
-        public Task DeleteSectorTypeAsync(Guid id);
+        Task DeleteSectorTypeAsync(Guid id);
     }
 }
