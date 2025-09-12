@@ -1,5 +1,6 @@
 ﻿using MottuChallenge.Domain.Enums;
 using MottuChallenge.Domain.Validations;
+using System.Text.Json.Serialization;
 
 namespace MottuChallenge.Domain.Entities
 {
@@ -7,6 +8,7 @@ namespace MottuChallenge.Domain.Entities
     {
         public Guid SpotId { get; private set; }
         public Guid SectorId { get; private set; }
+        [JsonIgnore]
         public Sector Sector { get; private set; }
         public double X { get; private set; }
         public double Y { get; private set; }
