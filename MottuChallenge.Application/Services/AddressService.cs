@@ -1,13 +1,15 @@
 ﻿using MottuChallenge.Application.DTOs.Response;
 using MottuChallenge.Domain.Entities;
+using MottuChallenge.Infrastructure.Repositories;
 using System.Text.Json;
 
 namespace MottuChallenge.Application.Services
 {
-    public class AddressService(HttpClient httpClient) : IAddressService
+    public class AddressService(HttpClient httpClient, IAddressRepository addressRepository) : IAddressService
     {
 
         private readonly HttpClient _httpClient = httpClient;
+        private readonly IAddressRepository _addressRepository = addressRepository;
 
         public async Task<Address> GetAddressByCepAsync(string cep, string number)
         {
@@ -27,6 +29,11 @@ namespace MottuChallenge.Application.Services
                 cep,
                 "Brasil"
             );
+        }
+
+        public async Task<Address> GetAddressByIdAsync(Guid id)
+        {
+            return await _addressRepository.GetAddressByIdAsync(id);
         }
     }
 }
