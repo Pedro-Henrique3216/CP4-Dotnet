@@ -40,7 +40,7 @@ O objetivo é permitir que filiais da Mottu consigam estruturar seus pátios em 
 ### Passos
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/mottu-challenge.git](https://github.com/Pedro-Henrique3216/CP4-Dotnet/
+   git clone https://github.com/Pedro-Henrique3216/CP4-Dotnet.git
    cd mottu-challenge
    ```
    Abra a solução
