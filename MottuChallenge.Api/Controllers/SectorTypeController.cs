@@ -31,5 +31,11 @@ namespace MottuChallenge.Api.Controllers
             return Ok(sectorType);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            await _sectorType.DeleteSectorTypeAsync(id);
+            return NoContent();
+        }
     }
 }

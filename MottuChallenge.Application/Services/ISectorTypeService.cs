@@ -11,5 +11,7 @@ namespace MottuChallenge.Application.Services
         public Task<List<SectorType>> GetAllSectorTypesAsync();
 
         public Task<SectorType> UpdateSectorTypeAsync(SectorTypeCreateDto dto, Guid id);
+
+        public Task DeleteSectorTypeAsync(Guid id);
     }
 }

@@ -39,5 +39,12 @@ namespace MottuChallenge.Application.Services
             await _sectorTypeRepository.UpdateSectorTypeAsync(sectorType);
             return sectorType;
         }
+
+        public async Task DeleteSectorTypeAsync(Guid id)
+        {
+            var sectorType = await _sectorTypeRepository.FindAsync(id);
+            await _sectorTypeRepository.DeleteSectorTypeAsync(sectorType);
+
+        }
     }
 }

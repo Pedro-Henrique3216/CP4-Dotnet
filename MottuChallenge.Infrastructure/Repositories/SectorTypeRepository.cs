@@ -39,6 +39,12 @@ namespace MottuChallenge.Infrastructure.Repositories
             return await _context.SectorTypes.FindAsync(id);
         }
 
+        public async Task DeleteSectorTypeAsync(SectorType sectorType)
+        {
+            _context.SectorTypes.Remove(sectorType);
+            await _context.SaveChangesAsync();
+        }
+
 
 
     }

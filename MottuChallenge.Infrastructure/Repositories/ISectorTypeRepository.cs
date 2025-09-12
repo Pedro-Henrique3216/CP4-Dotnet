@@ -14,5 +14,7 @@ namespace MottuChallenge.Infrastructure.Repositories
         public Task<SectorType> UpdateSectorTypeAsync(SectorType sectorType);
 
         public Task<SectorType> FindAsync(Guid id);
+
+        public Task DeleteSectorTypeAsync(SectorType sectorType);
     }
 }
