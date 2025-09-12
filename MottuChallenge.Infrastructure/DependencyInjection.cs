@@ -23,6 +23,7 @@ namespace MottuChallenge.Infrastructure
             services.AddScoped<IYardRepository, YardRepository>();
             services.AddScoped<ISectorRepository, SectorRepository>();
             services.AddScoped<ISectorTypeRepository, SectorTypeRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
             return services;
         }
     }
