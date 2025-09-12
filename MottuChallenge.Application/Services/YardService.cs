@@ -34,7 +34,7 @@ namespace MottuChallenge.Application.Services
         public async Task<YardResponseDto?> GetYardResponseByIdAsync(Guid id)
         {
             var yard = await _yardRepository.GetYardByIdAsync(id);
-            var address = await _addressService.GetAddressByIdAsync(yard.Id);
+            var address = await _addressService.GetAddressByIdAsync(yard.AddressId);
             yard.Address = address;
 
             var addressResponse = createAddressResponseDto(yard.Address);
@@ -45,7 +45,7 @@ namespace MottuChallenge.Application.Services
         public async Task<Yard?> GetYardByIdAsync(Guid id)
         {
             var yard = await _yardRepository.GetYardByIdAsync(id);
-            var address = await _addressService.GetAddressByIdAsync(yard.Id);
+            var address = await _addressService.GetAddressByIdAsync(yard.AddressId);
             yard.Address = address;
 
             return yard;
