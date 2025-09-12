@@ -11,12 +11,15 @@ namespace MottuChallenge.Api.Controllers
         private readonly IYardService _yardService = yardService;
 
         [HttpPost]
-        public async Task Post([FromBody] CreateYardDto createYardDto)
+        [ProducesResponseType(typeof(void), 201)]
+        public async Task<IActionResult> Post([FromBody] CreateYardDto createYardDto)
         {
             await _yardService.SaveYardAsync(createYardDto);
+            return Created();
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(void), 200)]
         public async Task<IActionResult> GetAllYardsAsync()
         {
             var yards = await _yardService.GetAllYardsAsync();
@@ -24,6 +27,7 @@ namespace MottuChallenge.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(void), 200)]
         public async Task<IActionResult> getById([FromRoute] Guid id)
         {
             var yard = await _yardService.GetYardResponseByIdAsync(id);

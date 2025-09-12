@@ -12,12 +12,15 @@ namespace MottuChallenge.Api.Controllers
         private readonly ISectorTypeService _sectorType = sectorType;
 
         [HttpPost]
-        public async Task Post([FromBody] SectorTypeDto sectorTypeCreateDto)
+        [ProducesResponseType(typeof(void), 201)]
+        public async Task<IActionResult> Post([FromBody] SectorTypeDto sectorTypeCreateDto)
         {
             await _sectorType.AddSectorType(sectorTypeCreateDto);
+            return Created();
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(void), 200)]
         public async Task<IActionResult> Get()
         {
             var sectors = await _sectorType.GetAllSectorTypesAsync();
@@ -25,6 +28,7 @@ namespace MottuChallenge.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(void), 200)]
         public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] SectorTypeDto sectorTypeCreateDto)
         {
             var sectorType = await _sectorType.UpdateSectorTypeAsync(sectorTypeCreateDto, id);
@@ -32,6 +36,7 @@ namespace MottuChallenge.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(void), 204)]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             await _sectorType.DeleteSectorTypeAsync(id);

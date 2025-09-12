@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MottuChallenge.Application.DTOs.Request;
+using MottuChallenge.Application.DTOs.Response;
 using MottuChallenge.Application.Services;
 
 namespace MottuChallenge.Api.Controllers
@@ -11,24 +12,29 @@ namespace MottuChallenge.Api.Controllers
         private readonly ISectorService _sectorService = sectorService;
 
         [HttpPost]
-        public async Task Post([FromBody] SectorCreateDto sectorCreateDto)
+        [ProducesResponseType(typeof(void), 201)]
+        public async Task<IActionResult> Post([FromBody] SectorCreateDto sectorCreateDto)
         {
             await _sectorService.SaveSectorAsync(sectorCreateDto);
+            return Created();
         }
 
+       
         [HttpGet]
-        public async Task<IActionResult> GetAllYardsAsync()
+        [ProducesResponseType(typeof(List<SectorResponseDto>), 200)]
+        public async Task<IActionResult> GetAllSectorsAsync()
         {
-            var yards = await _sectorService.GetAllSectorsAsync();
-            return Ok(yards);
+            var sectors = await _sectorService.GetAllSectorsAsync();
+            return Ok(sectors);
         }
 
+      
         [HttpGet("{id}")]
-        public async Task<IActionResult> getById([FromRoute] Guid id)
+        [ProducesResponseType(typeof(SectorResponseDto), 200)]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var yard = await _sectorService.GetSectorByIdAsync(id);
-            return Ok(yard);
+            var sector = await _sectorService.GetSectorByIdAsync(id);
+            return Ok(sector);
         }
-
     }
 }
