@@ -1,9 +1,9 @@
 ﻿using MottuChallenge.Application.DTOs.Request;
+using MottuChallenge.Application.DTOs.Response;
 using MottuChallenge.Application.Helpers;
 using MottuChallenge.Domain.Entities;
 using MottuChallenge.Domain.ValueObjects;
 using MottuChallenge.Infrastructure.Repositories;
-using System.ComponentModel;
 
 namespace MottuChallenge.Application.Services
 {
@@ -19,6 +19,7 @@ namespace MottuChallenge.Application.Services
             var sector = new Sector(sectorCreateDto.SectorTypeId, sectorCreateDto.YardId);
 
             var yard = await _yardService.GetYardByIdAsync(sector.YardId);
+
 
             ValidateYardExists(yard);
 
@@ -74,13 +75,73 @@ namespace MottuChallenge.Application.Services
             }
         }
 
-        public async Task<Sector> GetSectorByIdAsync(Guid sectorId)
+        public async Task<SectorResponseDto> GetSectorByIdAsync(Guid sectorId)
         {
-            return await _sectorRepository.GetSectorByIdAsync(sectorId);
+            var sector = await _sectorRepository.GetSectorByIdAsync(sectorId);
+
+            var points = createListOfPointResponseDto(sector);
+
+            var spots = createListOfSpotResponseDto(sector);
+
+            return new SectorResponseDto
+            {
+                Id = sector.Id,
+                YardId = sector.YardId,
+                SectorTypeId = sector.SectorTypeId,
+                Points = points,
+                Spots = spots
+            };
+
         }
-        public async Task<List<Sector>> GetAllSectorsAsync()
+        public async Task<List<SectorResponseDto>> GetAllSectorsAsync()
         {
-            return await _sectorRepository.GetAllSectorsAsync();
+            var sectors = await _sectorRepository.GetAllSectorsAsync();
+
+            var sectorsDto = new List<SectorResponseDto>();
+
+            foreach (var sector in sectors)
+            {
+                var points = createListOfPointResponseDto(sector);
+
+                var spots = createListOfSpotResponseDto(sector);
+
+                var sectorResponseDto = new SectorResponseDto
+                {
+                    Id = sector.Id,
+                    YardId = sector.YardId,
+                    SectorTypeId = sector.SectorTypeId,
+                    Points = points,
+                    Spots = spots
+                };
+
+                sectorsDto.Add(sectorResponseDto);
+            }
+
+            return sectorsDto;
+        }
+
+        private List<PointResponseDto> createListOfPointResponseDto(Sector sector)
+        {
+            var points = new List<PointResponseDto>();
+
+            foreach (var point in sector.Points)
+            {
+                points.Add(new PointResponseDto { PointOrder = point.PointOrder, X = point.X, Y = point.Y });
+            }
+
+            return points;
+        }
+
+        private List<SpotResponseDto> createListOfSpotResponseDto(Sector sector)
+        {
+            var spots = new List<SpotResponseDto>();
+
+            foreach (var spot in sector.Spots)
+            {
+                spots.Add(new SpotResponseDto { SpotId = spot.SpotId, SectorId = spot.SectorId, Status = spot.Status, MotorcycleId = spot.MotorcycleId, X = spot.X, Y = spot.Y });
+            }
+
+            return spots;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MottuChallenge.Application.DTOs.Request;
+using MottuChallenge.Application.DTOs.Response;
 using MottuChallenge.Domain.Entities;
 using MottuChallenge.Domain.ValueObjects;
 using MottuChallenge.Infrastructure.Repositories;
@@ -30,23 +31,58 @@ namespace MottuChallenge.Application.Services
             return yard;
         }
 
+        public async Task<YardResponseDto?> GetYardResponseByIdAsync(Guid id)
+        {
+            var yard = await _yardRepository.GetYardByIdAsync(id);
+            var address = await _addressService.GetAddressByIdAsync(yard.Id);
+            yard.Address = address;
+
+            var addressResponse = createAddressResponseDto(yard.Address);
+            var points = createListOfPointResponseDto(yard);
+            return new YardResponseDto { Address = addressResponse, Id = yard.Id, Name = yard.Name, Points = points };
+        }
+
         public async Task<Yard?> GetYardByIdAsync(Guid id)
         {
             var yard = await _yardRepository.GetYardByIdAsync(id);
             var address = await _addressService.GetAddressByIdAsync(yard.Id);
             yard.Address = address;
+
             return yard;
         }
 
-        public async Task<List<Yard>> GetAllYardsAsync()
+        public async Task<List<YardResponseDto>> GetAllYardsAsync()
         {
             var yards = await _yardRepository.GetAllYardsAsync();
+
+            var yardsResponse = new List<YardResponseDto>();
             foreach (var yard in yards) 
             {
                 var address = await _addressService.GetAddressByIdAsync(yard.AddressId);
                 yard.Address = address;
+                var addressResponse = createAddressResponseDto(yard.Address);
+                var points = createListOfPointResponseDto(yard);
+                yardsResponse.Add(new YardResponseDto { Address = addressResponse, Id = yard.Id, Name = yard.Name, Points = points });
             }
-            return yards;
+            return yardsResponse;
         }
+
+        private AddressResponseDto createAddressResponseDto(Address address)
+        {
+            return new AddressResponseDto { City = address.City, Country = address.Country, Neighborhood = address.Neighborhood, Number = address.Number, State = address.State, Street = address.Street, ZipCode = address.ZipCode };
+        }
+
+        private List<PointResponseDto> createListOfPointResponseDto(Yard yard)
+        {
+            var points = new List<PointResponseDto>();
+
+            foreach (var point in yard.Points)
+            {
+                points.Add(new PointResponseDto { PointOrder = point.PointOrder, X = point.X, Y = point.Y });
+            }
+
+            return points;
+        }
+
     }
 }

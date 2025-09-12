@@ -1,4 +1,5 @@
 ﻿using MottuChallenge.Application.DTOs.Request;
+using MottuChallenge.Application.DTOs.Response;
 using MottuChallenge.Domain.Entities;
 
 namespace MottuChallenge.Application.Services
@@ -6,8 +7,7 @@ namespace MottuChallenge.Application.Services
     public interface ISectorService
     {
         public Task<Sector> SaveSectorAsync(SectorCreateDto sectorCreateDto);
-
-        public Task<Sector> GetSectorByIdAsync(Guid sectorId);
-        public Task<List<Sector>> GetAllSectorsAsync();
+        public Task<SectorResponseDto> GetSectorByIdAsync(Guid sectorId);
+        public Task<List<SectorResponseDto>> GetAllSectorsAsync();
     }
 }

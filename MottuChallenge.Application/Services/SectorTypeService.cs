@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MottuChallenge.Application.DTOs.Request;
+using MottuChallenge.Application.DTOs.Response;
 using MottuChallenge.Domain.Entities;
 using MottuChallenge.Infrastructure.Repositories;
 
@@ -9,7 +10,7 @@ namespace MottuChallenge.Application.Services
     {
         private readonly ISectorTypeRepository _sectorTypeRepository = sectorTypeRepository;
 
-        public async Task<SectorType> AddSectorType(SectorTypeCreateDto sectorTypeCreateDto)
+        public async Task<SectorType> AddSectorType(SectorTypeDto sectorTypeCreateDto)
         {
             var verifySector = await _sectorTypeRepository.FindSectorByName(sectorTypeCreateDto.Name.ToLower());
             if (verifySector != null)
@@ -23,12 +24,17 @@ namespace MottuChallenge.Application.Services
             return sectorType;
         }
 
-        public async Task<List<SectorType>> GetAllSectorTypesAsync()
+        public async Task<List<SectorTypeResponseDto>> GetAllSectorTypesAsync()
         {
-            return await _sectorTypeRepository.GetAllSectorTypesAsync();
+            var sectorTypes =  await _sectorTypeRepository.GetAllSectorTypesAsync();
+            return sectorTypes.Select(st => new SectorTypeResponseDto
+            {
+                Id = st.Id,
+                Name = st.Name
+            }).ToList();
         }
 
-        public async Task<SectorType> UpdateSectorTypeAsync(SectorTypeCreateDto dto, Guid id)
+        public async Task<SectorTypeResponseDto> UpdateSectorTypeAsync(SectorTypeDto dto, Guid id)
         {
             var sectorType = await _sectorTypeRepository.FindAsync(id);
             if (sectorType == null)
@@ -37,7 +43,12 @@ namespace MottuChallenge.Application.Services
             sectorType.AlterName(dto.Name);
 
             await _sectorTypeRepository.UpdateSectorTypeAsync(sectorType);
-            return sectorType;
+
+            return new SectorTypeResponseDto
+            {
+                Id = sectorType.Id,
+                Name = sectorType.Name
+            };
         }
 
         public async Task DeleteSectorTypeAsync(Guid id)

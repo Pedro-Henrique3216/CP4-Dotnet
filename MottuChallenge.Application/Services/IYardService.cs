@@ -1,4 +1,5 @@
 ﻿using MottuChallenge.Application.DTOs.Request;
+using MottuChallenge.Application.DTOs.Response;
 using MottuChallenge.Domain.Entities;
 
 namespace MottuChallenge.Application.Services
@@ -9,6 +10,8 @@ namespace MottuChallenge.Application.Services
 
         Task<Yard?> GetYardByIdAsync(Guid id);
 
-        public Task<List<Yard>> GetAllYardsAsync();
+        public Task<List<YardResponseDto>> GetAllYardsAsync();
+
+        public Task<YardResponseDto?> GetYardResponseByIdAsync(Guid id);
     }
 }

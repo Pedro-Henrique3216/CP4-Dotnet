@@ -26,7 +26,7 @@ namespace MottuChallenge.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> getById([FromRoute] Guid id)
         {
-            var yard = await _yardService.GetYardByIdAsync(id);
+            var yard = await _yardService.GetYardResponseByIdAsync(id);
             return Ok(yard);
         }
        

@@ -12,7 +12,7 @@ namespace MottuChallenge.Api.Controllers
         private readonly ISectorTypeService _sectorType = sectorType;
 
         [HttpPost]
-        public async Task Post([FromBody] SectorTypeCreateDto sectorTypeCreateDto)
+        public async Task Post([FromBody] SectorTypeDto sectorTypeCreateDto)
         {
             await _sectorType.AddSectorType(sectorTypeCreateDto);
         }
@@ -25,7 +25,7 @@ namespace MottuChallenge.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] SectorTypeCreateDto sectorTypeCreateDto)
+        public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] SectorTypeDto sectorTypeCreateDto)
         {
             var sectorType = await _sectorType.UpdateSectorTypeAsync(sectorTypeCreateDto, id);
             return Ok(sectorType);
