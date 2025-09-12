@@ -32,7 +32,21 @@ namespace MottuChallenge.Application.Services
 
         public async Task<Yard?> GetYardByIdAsync(Guid id)
         {
-            return await _yardRepository.GetYardByIdAsync(id);
+            var yard = await _yardRepository.GetYardByIdAsync(id);
+            var address = await _addressService.GetAddressByIdAsync(yard.Id);
+            yard.Address = address;
+            return yard;
+        }
+
+        public async Task<List<Yard>> GetAllYardsAsync()
+        {
+            var yards = await _yardRepository.GetAllYardsAsync();
+            foreach (var yard in yards) 
+            {
+                var address = await _addressService.GetAddressByIdAsync(yard.AddressId);
+                yard.Address = address;
+            }
+            return yards;
         }
     }
 }

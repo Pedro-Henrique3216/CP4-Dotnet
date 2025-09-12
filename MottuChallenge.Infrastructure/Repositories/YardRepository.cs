@@ -1,4 +1,5 @@
-﻿using MottuChallenge.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MottuChallenge.Domain.Entities;
 using MottuChallenge.Infrastructure.Persistence;
 
 namespace MottuChallenge.Infrastructure.Repositories
@@ -17,6 +18,11 @@ namespace MottuChallenge.Infrastructure.Repositories
         public async Task<Yard?> GetYardByIdAsync(Guid id)
         {
             return await _context.Yards.FindAsync(id);
+        }
+
+        public async Task<List<Yard>> GetAllYardsAsync()
+        {
+            return await _context.Yards.ToListAsync();
         }
     }
 }

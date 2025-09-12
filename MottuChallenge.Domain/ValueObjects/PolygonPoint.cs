@@ -1,5 +1,4 @@
-﻿using MottuChallenge.Domain.Entities;
-using MottuChallenge.Domain.Exceptions;
+﻿using MottuChallenge.Domain.Exceptions;
 using MottuChallenge.Domain.Validations;
 
 namespace MottuChallenge.Domain.ValueObjects

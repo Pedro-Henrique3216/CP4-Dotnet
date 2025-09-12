@@ -16,5 +16,19 @@ namespace MottuChallenge.Api.Controllers
             await _yardService.SaveYardAsync(createYardDto);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllYardsAsync()
+        {
+            var yards = await _yardService.GetAllYardsAsync();
+            return Ok(yards);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> getById([FromRoute] Guid id)
+        {
+            var yard = await _yardService.GetYardByIdAsync(id);
+            return Ok(yard);
+        }
+       
     }
 }

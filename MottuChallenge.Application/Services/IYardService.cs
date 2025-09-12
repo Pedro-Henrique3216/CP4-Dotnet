@@ -8,5 +8,7 @@ namespace MottuChallenge.Application.Services
         Task<Yard> SaveYardAsync(CreateYardDto createYardDto);
 
         Task<Yard?> GetYardByIdAsync(Guid id);
+
+        public Task<List<Yard>> GetAllYardsAsync();
     }
 }
