@@ -22,5 +22,19 @@ namespace MottuChallenge.Infrastructure.Repositories
                                  .Where(s => s.YardId == yardId)
                                  .ToListAsync();
         }
+
+        public async Task<Sector> GetSectorByIdAsync(Guid sectorId)
+        {
+            return await _context.Sectors
+                                 .Include(s => s.Spots)
+                                 .FirstOrDefaultAsync(s => s.Id == sectorId);
+        }
+
+        public async Task<List<Sector>> GetAllSectorsAsync()
+        {
+            return await _context.Sectors
+                                 .Include(s => s.Spots)
+                                 .ToListAsync();
+        }
     }
 }

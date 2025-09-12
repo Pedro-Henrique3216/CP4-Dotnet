@@ -8,5 +8,8 @@ namespace MottuChallenge.Infrastructure.Repositories
         public Task<Sector> SaveSectorAsync(Sector sector);
 
         public Task<List<Sector>> GetSectorsByYardIdAsync(Guid yardId);
+
+        public Task<Sector> GetSectorByIdAsync(Guid sectorId);
+        public Task<List<Sector>> GetAllSectorsAsync();
     }
 }

@@ -16,5 +16,19 @@ namespace MottuChallenge.Api.Controllers
             await _sectorService.SaveSectorAsync(sectorCreateDto);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllYardsAsync()
+        {
+            var yards = await _sectorService.GetAllSectorsAsync();
+            return Ok(yards);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> getById([FromRoute] Guid id)
+        {
+            var yard = await _sectorService.GetSectorByIdAsync(id);
+            return Ok(yard);
+        }
+
     }
 }

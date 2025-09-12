@@ -73,5 +73,14 @@ namespace MottuChallenge.Application.Services
                 throw new InvalidOperationException("Yard does not exist.");
             }
         }
+
+        public async Task<Sector> GetSectorByIdAsync(Guid sectorId)
+        {
+            return await _sectorRepository.GetSectorByIdAsync(sectorId);
+        }
+        public async Task<List<Sector>> GetAllSectorsAsync()
+        {
+            return await _sectorRepository.GetAllSectorsAsync();
+        }
     }
 }
