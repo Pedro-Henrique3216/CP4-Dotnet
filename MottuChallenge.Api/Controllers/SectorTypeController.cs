@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using MottuChallenge.Application.DTOs.Request;
 using MottuChallenge.Application.Services;
 
 namespace MottuChallenge.Api.Controllers
 {
-    [Route("api/sectors_type")]
+    [Route("api/v{version:apiVersion}/sectors_type")]
     [ApiController]
+    [ApiVersion(1.0)]
     public class SectorTypeController(ISectorTypeService sectorType) : ControllerBase
     {
         private readonly ISectorTypeService _sectorType = sectorType;

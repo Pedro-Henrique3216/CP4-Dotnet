@@ -19,10 +19,10 @@ namespace MottuChallenge.Api
             builder.Services.AddScoped<ISectorService, SectorService>();
             builder.Services.AddScoped<ISpotService, SpotService>();
             builder.Services.AddScoped<ISectorTypeService, SectorTypeService>();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwagger(configs.Swagger);
             builder.Services.AddHealthServices(configs.ConnectionStrings);
+            builder.Services.AddVersioning();
 
             var app = builder.Build();
 
@@ -30,7 +30,12 @@ namespace MottuChallenge.Api
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(ui =>
+                    {
+                        ui.SwaggerEndpoint("/swagger/v1/swagger.json",  "MottuGrid.API v1");
+                        ui.SwaggerEndpoint("/swagger/v2/swagger.json",  "MottuGrid.API v2");
+                    }
+                );;
             }
 
             app.UseHttpsRedirection();

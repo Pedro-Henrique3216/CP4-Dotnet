@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using MottuChallenge.Application.DTOs.Request;
 using MottuChallenge.Application.DTOs.Response;
 using MottuChallenge.Application.Services;
 
 namespace MottuChallenge.Api.Controllers
 {
-    [Route("api/sectors")]
+    [Route("api/v{version:apiVersion}/sectors")]
     [ApiController]
+    [ApiVersion(1.0)]
     public class SectorController(ISectorService sectorService) : ControllerBase
     {
         private readonly ISectorService _sectorService = sectorService;

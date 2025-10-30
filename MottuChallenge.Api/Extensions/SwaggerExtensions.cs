@@ -25,7 +25,7 @@ public static class SwaggerExtensions
             swagger.SwaggerDoc("v2", new OpenApiInfo
             {
                 Title = settings.Title,
-                Version = settings.Version,
+                Version = "v2",
                 Description = settings.Description,
                 Contact = new OpenApiContact
                 {

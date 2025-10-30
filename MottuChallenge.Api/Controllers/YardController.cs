@@ -1,20 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using MottuChallenge.Application.DTOs.Request;
 using MottuChallenge.Application.Services;
 
 namespace MottuChallenge.Api.Controllers
 {
-    [Route("api/yards")]
+    [Route("api/v{version:apiVersion}/yards")]
     [ApiController]
+    [ApiVersion(2.0)]
     public class YardController(IYardService yardService) : ControllerBase
     {
-        private readonly IYardService _yardService = yardService;
-
         [HttpPost]
         [ProducesResponseType(typeof(void), 201)]
         public async Task<IActionResult> Post([FromBody] CreateYardDto createYardDto)
         {
-            await _yardService.SaveYardAsync(createYardDto);
+            await yardService.SaveYardAsync(createYardDto);
             return Created();
         }
 
@@ -22,7 +22,7 @@ namespace MottuChallenge.Api.Controllers
         [ProducesResponseType(typeof(void), 200)]
         public async Task<IActionResult> GetAllYardsAsync()
         {
-            var yards = await _yardService.GetAllYardsAsync();
+            var yards = await yardService.GetAllYardsAsync();
             return Ok(yards);
         }
 
@@ -30,7 +30,7 @@ namespace MottuChallenge.Api.Controllers
         [ProducesResponseType(typeof(void), 200)]
         public async Task<IActionResult> getById([FromRoute] Guid id)
         {
-            var yard = await _yardService.GetYardResponseByIdAsync(id);
+            var yard = await yardService.GetYardResponseByIdAsync(id);
             return Ok(yard);
         }
        
