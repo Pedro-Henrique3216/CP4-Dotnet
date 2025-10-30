@@ -28,10 +28,17 @@ namespace MottuChallenge.Infrastructure
             return services;
         }
         
+        private static IServiceCollection AddMongoDB(this IServiceCollection services)
+        {
+            services.AddScoped<MongoContext>();
+            return services;
+        }
+        
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, Settings settings)
         {
             services.AddDbContext(settings.ConnectionStrings);
             services.AddRepositories();
+            services.AddMongoDB();
             return services;
         }
     }
