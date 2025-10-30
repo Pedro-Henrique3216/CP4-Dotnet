@@ -1,3 +1,4 @@
+using MottuChallenge.Application.Configurations;
 using MottuChallenge.Application.Services;
 using MottuChallenge.Infrastructure;
 
@@ -8,10 +9,8 @@ namespace MottuChallenge.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            builder.Services.AddDbContext(builder.Configuration);
-            builder.Services.AddRepositories();
+            var configs = builder.Configuration.Get<Settings>();
+            builder.Services.AddInfrastructure(configs);
             builder.Services.AddControllers();
             builder.Services.AddScoped<IYardService, YardService>();
             builder.Services.AddHttpClient<IAddressService, AddressService>();
@@ -26,7 +25,7 @@ namespace MottuChallenge.Api
                 {
                     Title = "MottuChallenge API",
                     Version = "v1",
-                    Description = "API para gerenciamento de setores e pátios"
+                    Description = "API para gerenciamento de setores e pï¿½tios"
                 });
             });
 
