@@ -11,13 +11,11 @@ namespace MottuChallenge.Api.Controllers
     [ApiVersion(1.0)]
     public class SectorController(ISectorService sectorService) : ControllerBase
     {
-        private readonly ISectorService _sectorService = sectorService;
-
         [HttpPost]
         [ProducesResponseType(typeof(void), 201)]
         public async Task<IActionResult> Post([FromBody] SectorCreateDto sectorCreateDto)
         {
-            await _sectorService.SaveSectorAsync(sectorCreateDto);
+            await sectorService.SaveSectorAsync(sectorCreateDto);
             return Created();
         }
 
@@ -26,7 +24,7 @@ namespace MottuChallenge.Api.Controllers
         [ProducesResponseType(typeof(List<SectorResponseDto>), 200)]
         public async Task<IActionResult> GetAllSectorsAsync()
         {
-            var sectors = await _sectorService.GetAllSectorsAsync();
+            var sectors = await sectorService.GetAllSectorsAsync();
             return Ok(sectors);
         }
 
@@ -35,7 +33,7 @@ namespace MottuChallenge.Api.Controllers
         [ProducesResponseType(typeof(SectorResponseDto), 200)]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var sector = await _sectorService.GetSectorByIdAsync(id);
+            var sector = await sectorService.GetSectorByIdAsync(id);
             return Ok(sector);
         }
     }
