@@ -8,13 +8,9 @@ namespace MottuChallenge.Application.Services
 {
     public class YardService(IYardRepository yardRepository, IAddressService addressService) : IYardService
     {
-
-        private readonly IYardRepository _yardRepository = yardRepository;
-        private readonly IAddressService _addressService = addressService;
-
         public async Task<Yard> SaveYardAsync(CreateYardDto createYardDto)
         {
-            var address = await _addressService.GetAddressByCepAsync(createYardDto.Cep, createYardDto.Number);
+            var address = await addressService.GetAddressByCepAsync(createYardDto.Cep, createYardDto.Number);
 
             var yard = new Yard(createYardDto.Name, address.Id)
             {
@@ -27,14 +23,14 @@ namespace MottuChallenge.Application.Services
                 yard.AddPoint(point);
             }
             
-            await _yardRepository.SaveYardAsync(yard);
+            await yardRepository.SaveYardAsync(yard);
             return yard;
         }
 
         public async Task<YardResponseDto?> GetYardResponseByIdAsync(Guid id)
         {
-            var yard = await _yardRepository.GetYardByIdAsync(id);
-            var address = await _addressService.GetAddressByIdAsync(yard.AddressId);
+            var yard = await yardRepository.GetYardByIdAsync(id);
+            var address = await addressService.GetAddressByIdAsync(yard.AddressId);
             yard.Address = address;
 
             var addressResponse = createAddressResponseDto(yard.Address);
@@ -44,8 +40,8 @@ namespace MottuChallenge.Application.Services
 
         public async Task<Yard?> GetYardByIdAsync(Guid id)
         {
-            var yard = await _yardRepository.GetYardByIdAsync(id);
-            var address = await _addressService.GetAddressByIdAsync(yard.AddressId);
+            var yard = await yardRepository.GetYardByIdAsync(id);
+            var address = await addressService.GetAddressByIdAsync(yard.AddressId);
             yard.Address = address;
 
             return yard;
@@ -53,12 +49,12 @@ namespace MottuChallenge.Application.Services
 
         public async Task<List<YardResponseDto>> GetAllYardsAsync()
         {
-            var yards = await _yardRepository.GetAllYardsAsync();
+            var yards = await yardRepository.GetAllYardsAsync();
 
             var yardsResponse = new List<YardResponseDto>();
             foreach (var yard in yards) 
             {
-                var address = await _addressService.GetAddressByIdAsync(yard.AddressId);
+                var address = await addressService.GetAddressByIdAsync(yard.AddressId);
                 yard.Address = address;
                 var addressResponse = createAddressResponseDto(yard.Address);
                 var points = createListOfPointResponseDto(yard);

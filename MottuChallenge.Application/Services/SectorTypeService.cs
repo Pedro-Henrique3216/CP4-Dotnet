@@ -7,11 +7,9 @@ namespace MottuChallenge.Application.Services
 {
     public class SectorTypeService(ISectorTypeRepository sectorTypeRepository) : ISectorTypeService
     {
-        private readonly ISectorTypeRepository _sectorTypeRepository = sectorTypeRepository;
-
         public async Task<SectorType> AddSectorType(SectorTypeDto sectorTypeCreateDto)
         {
-            var verifySector = await _sectorTypeRepository.FindSectorByName(sectorTypeCreateDto.Name.ToLower());
+            var verifySector = await sectorTypeRepository.FindSectorByName(sectorTypeCreateDto.Name.ToLower());
             if (verifySector != null)
             {
                 throw new Exception("Ja existe sectorType com esse nome");
@@ -19,13 +17,13 @@ namespace MottuChallenge.Application.Services
 
             var sectorType = new SectorType(sectorTypeCreateDto.Name.ToLower());
 
-            await _sectorTypeRepository.SaveSectorTypeAsync(sectorType);
+            await sectorTypeRepository.SaveSectorTypeAsync(sectorType);
             return sectorType;
         }
 
         public async Task<List<SectorTypeResponseDto>> GetAllSectorTypesAsync()
         {
-            var sectorTypes =  await _sectorTypeRepository.GetAllSectorTypesAsync();
+            var sectorTypes =  await sectorTypeRepository.GetAllSectorTypesAsync();
             return sectorTypes.Select(st => new SectorTypeResponseDto
             {
                 Id = st.Id,
@@ -35,13 +33,13 @@ namespace MottuChallenge.Application.Services
 
         public async Task<SectorTypeResponseDto> UpdateSectorTypeAsync(SectorTypeDto dto, Guid id)
         {
-            var sectorType = await _sectorTypeRepository.FindAsync(id);
+            var sectorType = await sectorTypeRepository.FindAsync(id);
             if (sectorType == null)
                 throw new KeyNotFoundException($"SectorType with id {id} not found.");
 
             sectorType.AlterName(dto.Name);
 
-            await _sectorTypeRepository.UpdateSectorTypeAsync(sectorType);
+            await sectorTypeRepository.UpdateSectorTypeAsync(sectorType);
 
             return new SectorTypeResponseDto
             {
@@ -52,8 +50,8 @@ namespace MottuChallenge.Application.Services
 
         public async Task DeleteSectorTypeAsync(Guid id)
         {
-            var sectorType = await _sectorTypeRepository.FindAsync(id);
-            await _sectorTypeRepository.DeleteSectorTypeAsync(sectorType);
+            var sectorType = await sectorTypeRepository.FindAsync(id);
+            await sectorTypeRepository.DeleteSectorTypeAsync(sectorType);
 
         }
     }

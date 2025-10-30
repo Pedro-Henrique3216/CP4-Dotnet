@@ -9,23 +9,19 @@ namespace MottuChallenge.Application.Services
 {
     public class SectorService(ISectorRepository sectorRepository, IYardService yardService, ISpotService spotService) : ISectorService
     {
-        private readonly ISectorRepository _sectorRepository = sectorRepository;
-        private readonly IYardService _yardService = yardService;
-        private readonly ISpotService _spotService = spotService;
-
         public async Task<Sector> SaveSectorAsync(SectorCreateDto sectorCreateDto)
         {
 
             var sector = new Sector(sectorCreateDto.SectorTypeId, sectorCreateDto.YardId);
 
-            var yard = await _yardService.GetYardByIdAsync(sector.YardId);
+            var yard = await yardService.GetYardByIdAsync(sector.YardId);
 
 
             ValidateYardExists(yard);
 
             ValidateSectorInsideYard(sector, yard);
 
-            var existingSectors = await _sectorRepository.GetSectorsByYardIdAsync(yard.Id);
+            var existingSectors = await sectorRepository.GetSectorsByYardIdAsync(yard.Id);
 
             ValidateSectorOverlap(sector, existingSectors);
 
@@ -34,14 +30,14 @@ namespace MottuChallenge.Application.Services
                 sector.AddPoint(new PolygonPoint(point.PointOrder, point.X, point.Y));
             }
 
-            var spots = _spotService.GenerateSpot(sector, 2, 2);
+            var spots = spotService.GenerateSpot(sector, 2, 2);
 
             foreach (var spot in spots)
             {
                 sector.AddSpot(spot);
             }
 
-            return await _sectorRepository.SaveSectorAsync(sector);
+            return await sectorRepository.SaveSectorAsync(sector);
         }
 
 
@@ -77,7 +73,7 @@ namespace MottuChallenge.Application.Services
 
         public async Task<SectorResponseDto> GetSectorByIdAsync(Guid sectorId)
         {
-            var sector = await _sectorRepository.GetSectorByIdAsync(sectorId);
+            var sector = await sectorRepository.GetSectorByIdAsync(sectorId);
 
             var points = createListOfPointResponseDto(sector);
 
@@ -95,7 +91,7 @@ namespace MottuChallenge.Application.Services
         }
         public async Task<List<SectorResponseDto>> GetAllSectorsAsync()
         {
-            var sectors = await _sectorRepository.GetAllSectorsAsync();
+            var sectors = await sectorRepository.GetAllSectorsAsync();
 
             var sectorsDto = new List<SectorResponseDto>();
 
