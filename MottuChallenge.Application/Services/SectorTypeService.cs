@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MottuChallenge.Application.DTOs.Request;
+﻿using MottuChallenge.Application.DTOs.Request;
 using MottuChallenge.Application.DTOs.Response;
 using MottuChallenge.Domain.Entities;
 using MottuChallenge.Infrastructure.Repositories;
