@@ -21,15 +21,8 @@ namespace MottuChallenge.Api
             builder.Services.AddScoped<ISectorTypeService, SectorTypeService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new()
-                {
-                    Title = "MottuChallenge API",
-                    Version = "v1",
-                    Description = "API para gerenciamento de setores e p�tios"
-                });
-            });
+            builder.Services.AddSwagger(configs.Swagger);
+            builder.Services.AddHealthServices(configs.ConnectionStrings);
 
             var app = builder.Build();
 
