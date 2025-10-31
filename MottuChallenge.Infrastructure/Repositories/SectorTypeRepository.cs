@@ -6,43 +6,40 @@ namespace MottuChallenge.Infrastructure.Repositories
 {
     internal class SectorTypeRepository(MottuChallengeContext context) : ISectorTypeRepository
     {
-
-        private readonly MottuChallengeContext _context = context;
-
         public async Task<SectorType> FindSectorByName(string name)
         {
-            return await _context.SectorTypes
+            return await context.SectorTypes
                         .FirstOrDefaultAsync(s => s.Name == name);
 
         }
 
         public async Task<SectorType> SaveSectorTypeAsync(SectorType sectorType)
         {
-            await _context.SectorTypes.AddAsync(sectorType);
-            await _context.SaveChangesAsync();
+            await context.SectorTypes.AddAsync(sectorType);
+            await context.SaveChangesAsync();
             return sectorType;
         }
 
         public async Task<List<SectorType>> GetAllSectorTypesAsync()
         {
-            return await _context.SectorTypes.ToListAsync();
+            return await context.SectorTypes.ToListAsync();
         }
         public async Task<SectorType> UpdateSectorTypeAsync(SectorType sectorType)
         {
-            _context.SectorTypes.Update(sectorType);
-            await _context.SaveChangesAsync();
+            context.SectorTypes.Update(sectorType);
+            await context.SaveChangesAsync();
             return sectorType;
         }
 
         public async Task<SectorType> FindAsync(Guid id)
         {
-            return await _context.SectorTypes.FindAsync(id);
+            return await context.SectorTypes.FindAsync(id);
         }
 
         public async Task DeleteSectorTypeAsync(SectorType sectorType)
         {
-            _context.SectorTypes.Remove(sectorType);
-            await _context.SaveChangesAsync();
+            context.SectorTypes.Remove(sectorType);
+            await context.SaveChangesAsync();
         }
 
 

@@ -1,15 +1,18 @@
 ﻿using MottuChallenge.Application.DTOs.Response;
+using MottuChallenge.Application.Interfaces;
 using MottuChallenge.Domain.Entities;
-using MottuChallenge.Infrastructure.Repositories;
 using System.Text.Json;
 
-namespace MottuChallenge.Application.Services
+namespace MottuChallenge.Infrastructure.Services
 {
-    public class AddressService(HttpClient httpClient, IAddressRepository addressRepository) : IAddressService
+    internal class FindAddressByApiViaCep : IAddressProvider
     {
+        private readonly HttpClient _httpClient;
 
-        private readonly HttpClient _httpClient = httpClient;
-        private readonly IAddressRepository _addressRepository = addressRepository;
+        public FindAddressByApiViaCep(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
 
         public async Task<Address> GetAddressByCepAsync(string cep, string number)
         {
@@ -19,8 +22,7 @@ namespace MottuChallenge.Application.Services
             var viacepResponse = JsonSerializer.Deserialize<ViaCepResponse>(response)
                                  ?? throw new Exception("CEP não encontrado");
 
-            return new Address
-            (
+            return new Address(
                 viacepResponse.Logradouro,
                 int.Parse(number),
                 viacepResponse.Bairro,
@@ -29,11 +31,6 @@ namespace MottuChallenge.Application.Services
                 cep,
                 "Brasil"
             );
-        }
-
-        public async Task<Address> GetAddressByIdAsync(Guid id)
-        {
-            return await _addressRepository.GetAddressByIdAsync(id);
         }
     }
 }

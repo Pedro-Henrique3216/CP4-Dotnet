@@ -1,4 +1,7 @@
-using MottuChallenge.Application.Services;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using MottuChallenge.Api.Extensions;
+using MottuChallenge.Application;
+using MottuChallenge.Application.Configurations;
 using MottuChallenge.Infrastructure;
 
 namespace MottuChallenge.Api
@@ -8,27 +11,15 @@ namespace MottuChallenge.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            builder.Services.AddDbContext(builder.Configuration);
-            builder.Services.AddRepositories();
+            var configs = builder.Configuration.Get<Settings>();
+            builder.Services.AddSingleton(configs);
+            builder.Services.AddInfrastructure(configs);
             builder.Services.AddControllers();
-            builder.Services.AddScoped<IYardService, YardService>();
-            builder.Services.AddHttpClient<IAddressService, AddressService>();
-            builder.Services.AddScoped<ISectorService, SectorService>();
-            builder.Services.AddScoped<ISpotService, SpotService>();
-            builder.Services.AddScoped<ISectorTypeService, SectorTypeService>();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddUseCases();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new()
-                {
-                    Title = "MottuChallenge API",
-                    Version = "v1",
-                    Description = "API para gerenciamento de setores e pátios"
-                });
-            });
+            builder.Services.AddSwagger(configs.Swagger);
+            builder.Services.AddHealthServices(configs);
+            builder.Services.AddVersioning();
 
             var app = builder.Build();
 
@@ -36,15 +27,24 @@ namespace MottuChallenge.Api
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(ui =>
+                    {
+                        ui.SwaggerEndpoint("/swagger/v1/swagger.json",  "MottuGrid.API v1");
+                        ui.SwaggerEndpoint("/swagger/v2/swagger.json",  "MottuGrid.API v2");
+                    }
+                );;
             }
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
-
+            
             app.MapControllers();
+            
+            app.MapHealthChecks("/api/health-check", new HealthCheckOptions()
+            {
+                ResponseWriter = HealthCheckExtensions.WriteResponse
+            });
 
             app.Run();
         }
