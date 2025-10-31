@@ -45,6 +45,7 @@ public static class HealthCheckExtensions
         services
             .AddHealthChecks()
             .AddMySql(connectionSettings.MysqlConnection, name: "mysql connection")
+            .AddMongoDb()
             .AddUrlGroup(new Uri("https://viacep.com.br/"), name: "Via Cep API");
         
         return services;
