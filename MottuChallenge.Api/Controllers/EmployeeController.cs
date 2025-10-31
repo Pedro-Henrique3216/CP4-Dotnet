@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MottuChallenge.Application.DTOs.Request;
 using MottuChallenge.Application.UseCases.Employees;
 using MottuChallenge.Domain.Entities;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace MottuChallenge.Api.Controllers;
 
@@ -32,6 +33,9 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpPost]
+    [SwaggerOperation(Summary = "Cria um novo funcionário", Description = "Cria um funcionário com nome, email, yardId e senha.")]
+    [SwaggerResponse(201, "Funcionário criado com sucesso")]
+    [SwaggerResponse(400, "Dados inválidos")]
     public async Task<IActionResult> Post([FromBody] EmployeeDto employeeDto)
     {
         var employee = new Employee(employeeDto.Name, employeeDto.Email, employeeDto.YardId, employeeDto.Password);
@@ -40,6 +44,8 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpGet]
+    [SwaggerOperation(Summary = "Lista todos os funcionários", Description = "Retorna todos os funcionários cadastrados.")]
+    [SwaggerResponse(200, "Lista de funcionários retornada com sucesso")]
     public async Task<IActionResult> GetAll()
     {
         var employees = await _getAll.ExecuteAsync();
@@ -47,6 +53,9 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpGet("{email}")]
+    [SwaggerOperation(Summary = "Busca funcionário por email", Description = "Retorna os dados do funcionário correspondente ao email fornecido.")]
+    [SwaggerResponse(200, "Funcionário encontrado", typeof(Employee))]
+    [SwaggerResponse(404, "Funcionário não encontrado")]
     public async Task<IActionResult> GetByEmail([FromRoute] string email)
     {
         var employee = await _getByEmail.ExecuteAsync(email);
@@ -55,6 +64,9 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpPut]
+    [SwaggerOperation(Summary = "Atualiza um funcionário", Description = "Atualiza os dados de um funcionário existente.")]
+    [SwaggerResponse(200, "Funcionário atualizado com sucesso")]
+    [SwaggerResponse(400, "Dados inválidos")]
     public async Task<IActionResult> Put([FromBody] EmployeeDto employeeDto)
     {
         var employee = new Employee(employeeDto.Name, employeeDto.Email, employeeDto.YardId, employeeDto.Password);
@@ -63,6 +75,9 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpDelete("{email}")]
+    [SwaggerOperation(Summary = "Remove um funcionário", Description = "Deleta o funcionário correspondente ao email fornecido.")]
+    [SwaggerResponse(204, "Funcionário removido com sucesso")]
+    [SwaggerResponse(404, "Funcionário não encontrado")]
     public async Task<IActionResult> Delete([FromRoute] string email)
     {
         await _delete.ExecuteAsync(email);

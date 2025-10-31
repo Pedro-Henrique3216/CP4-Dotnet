@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MottuChallenge.Application.DTOs.Request;
 using MottuChallenge.Application.UseCases.Yards;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace MottuChallenge.Api.Controllers
 {
@@ -26,15 +27,19 @@ namespace MottuChallenge.Api.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(Summary = "Cria um novo pátio", Description = "Cria um pátio com as informações fornecidas no DTO.")]
+        [SwaggerResponse(201, "Pátio criado com sucesso")]
+        [SwaggerResponse(400, "Dados inválidos")]
         [ProducesResponseType(typeof(void), 201)]
         public async Task<IActionResult> Post([FromBody] CreateYardDto createYardDto)
         {
-            await _createYardUseCase.ExecuteAsync(createYardDto);
-            return Created();
+            var yard = await _createYardUseCase.ExecuteAsync(createYardDto);
+            return CreatedAtAction(nameof(GetById), new { id = yard.Id, version = HttpContext.GetRequestedApiVersion()?.ToString() }, yard);
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(void), 200)]
+        [SwaggerOperation(Summary = "Lista todos os pátios", Description = "Retorna a lista de todos os pátios cadastrados.")]
+        [SwaggerResponse(200, "Lista de pátios retornada com sucesso", typeof(List<CreateYardDto>))]
         public async Task<IActionResult> GetAllYardsAsync()
         {
             var yards = await _getAllYardsUseCase.ExecuteAsync();
@@ -42,7 +47,9 @@ namespace MottuChallenge.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(void), 200)]
+        [SwaggerOperation(Summary = "Busca pátio por ID", Description = "Retorna os dados do pátio correspondente ao ID fornecido.")]
+        [SwaggerResponse(200, "Pátio encontrado", typeof(CreateYardDto))]
+        [SwaggerResponse(404, "Pátio não encontrado")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var yard = await _getYardByIdUseCase.ExecuteAsync(id);
