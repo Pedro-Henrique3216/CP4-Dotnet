@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MottuChallenge.Application.Configurations;
+using MottuChallenge.Application.Interfaces;
 using MottuChallenge.Infrastructure.Persistence;
 using MottuChallenge.Infrastructure.Repositories;
+using MottuChallenge.Infrastructure.Services;
 
 namespace MottuChallenge.Infrastructure
 {
@@ -25,6 +27,13 @@ namespace MottuChallenge.Infrastructure
             services.AddScoped<ISectorRepository, SectorRepository>();
             services.AddScoped<ISectorTypeRepository, SectorTypeRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            return services;
+        }
+        
+        private static IServiceCollection AddServices(this IServiceCollection services)
+        {
+            services.AddHttpClient<IAddressProvider, FindAddressByApiViaCep>();
             return services;
         }
         
@@ -39,6 +48,7 @@ namespace MottuChallenge.Infrastructure
             services.AddDbContext(settings.ConnectionStrings);
             services.AddRepositories();
             services.AddMongoDB();
+            services.AddServices();
             return services;
         }
     }
