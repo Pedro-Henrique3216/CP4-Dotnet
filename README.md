@@ -26,7 +26,10 @@ O objetivo é permitir que filiais da Mottu consigam estruturar seus pátios em 
 - **Spot (Vaga)**  
   Representa uma vaga de moto dentro de um setor.  
   Por padrão, cada vaga ocupa um espaço de **2m x 2m**.  
-  Exemplo: um setor de 10m x 10m comporta 25 vagas.  
+  Exemplo: um setor de 10m x 10m comporta 25 vagas.
+  
+  - **Employee (Funcionario)**  
+    Representa o funcionario 
 
 ---
 
@@ -36,11 +39,12 @@ O objetivo é permitir que filiais da Mottu consigam estruturar seus pátios em 
 - [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - Banco de dados MySQL
 - [EF Core CLI](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
+- - MongoDB (usado por partes do projeto e pelo health-check)
 
 ### Passos
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/mottu-challenge.git](https://github.com/Pedro-Henrique3216/CP4-Dotnet/
+   git clone https://github.com/Pedro-Henrique3216/CP4-Dotnet.git
    cd mottu-challenge
    ```
    Abra a solução
@@ -57,6 +61,45 @@ O objetivo é permitir que filiais da Mottu consigam estruturar seus pátios em 
 4. Start o Programa
 
 ---
+
+### Como rodar o MongoDB
+
+Opção 1 — MongoDB instalado localmente
+
+Instale o MongoDB na sua máquina (via instalador oficial ou pacote). Garanta que o serviço esteja rodando e que a connection string em `appsettings.json` (Settings.MongoDb.ConnectionString) aponte para ele.
+
+Opção 2 — MongoDB via Docker (recomendado para desenvolvimento)
+
+No PowerShell:
+
+```powershell
+docker run -d --name mongodb -p 27017:27017 -v mongodbdata:/data/db mongo:6.0
+```
+
+Isso expõe o MongoDB em `localhost:27017`. Configure em `appsettings.json` uma connection string como `mongodb://localhost:27017` e defina `Settings.MongoDb.DatabaseName`.
+
+---
+
+## Health-check
+
+A API expõe um endpoint de health-check configurado em:
+
+- GET /api/health-check
+
+O health-check realiza checagens incluindo:
+
+- Conexão com MySQL (nome: "mysql connection")
+- Conexão com MongoDB (nome: "mongo connection")
+- Disponibilidade da ViaCep (nome: "Via Cep API")
+
+Exemplos (substitua a base URL se necessário):
+
+curl:
+
+```bash
+curl -k https://localhost:5001/api/health-check
+```
+----------------------------
 
 ## Testes
 
@@ -122,6 +165,33 @@ Content-Type: application/json
 ```
 
 com isso sera gerado o maximo de vagas disponiveis para a dimensão do setor, aqui tem validação se o setor cabe dentro do patio ou se ja tem um setor cadastrado nesse lugar.
+
+## Endpoints de Employee (versão 2)
+
+A API de funcionários está disponível na versão 2:
+
+- Base: `/api/v2/employees`
+
+Endpoints principais:
+
+- GET `/api/v2/employees` — listar todos os funcionários
+- GET `/api/v2/employees/{email}` — buscar funcionário por email
+- POST `/api/v2/employees` — criar funcionário
+- PUT `/api/v2/employees` — atualizar funcionário
+- DELETE `/api/v2/employees/{email}` — remover funcionário por email
+
+Exemplo de payload (POST/PUT):
+
+```json
+{
+  "name": "João Silva",
+  "email": "joao@example.com",
+  "yardId": "<id-do-yard>",
+  "password": "senha123"
+}
+```
+
+Exemplos rápidos (substitua a base URL conforme seu ambiente):
 
 
 
