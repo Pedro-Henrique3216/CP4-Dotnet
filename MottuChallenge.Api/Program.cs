@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using MottuChallenge.Api.Extensions;
+using MottuChallenge.Application;
 using MottuChallenge.Application.Configurations;
-using MottuChallenge.Application.Services;
 using MottuChallenge.Infrastructure;
 
 namespace MottuChallenge.Api
@@ -12,13 +12,10 @@ namespace MottuChallenge.Api
         {
             var builder = WebApplication.CreateBuilder(args);
             var configs = builder.Configuration.Get<Settings>();
+            builder.Services.AddSingleton(configs);
             builder.Services.AddInfrastructure(configs);
             builder.Services.AddControllers();
-            builder.Services.AddScoped<IYardService, YardService>();
-            builder.Services.AddHttpClient<IAddressService, AddressService>();
-            builder.Services.AddScoped<ISectorService, SectorService>();
-            builder.Services.AddScoped<ISpotService, SpotService>();
-            builder.Services.AddScoped<ISectorTypeService, SectorTypeService>();
+            builder.Services.AddUseCases();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwagger(configs.Swagger);
             builder.Services.AddHealthServices(configs.ConnectionStrings);
